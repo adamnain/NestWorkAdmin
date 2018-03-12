@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">NestWork Admin</string>
+    <string name="please_login">Please log in as Admin to access NestWork</string>
+    <string name="presensi_harian">Presensi</string>
+    <string name="karyawan">Karyawan</string>
+    <string name="cuti">Cuti</string>
+    <string name="slip_gaji">Slip Gaji</string>
+    <string name="profil_perusahaan">Profil Perusahaan</string>
+    <string name="nama">Nama</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="bidang_developer">Bidang Developer</string>
+    <string name="email">Email</string>
+    <string name="no_hp">No Hp</string>
+    <string name="informasi_umum">Informasi Umum</string>
+    <string name="informasi_akun">Informasi Akun</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="submit">submit</string>
+    <string name="detail">detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
