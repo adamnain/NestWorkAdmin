@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Activity;
+package com.sebasaku.nestworkadmin.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.sebasaku.nestworkadmin.Adapter.CutiPagerAdapter;
+import com.sebasaku.nestworkadmin.adapter.CutiPagerAdapter;
 import com.sebasaku.nestworkadmin.R;
 
 public class CutiActivity extends AppCompatActivity {

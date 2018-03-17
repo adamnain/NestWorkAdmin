@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Api.model;
+package com.sebasaku.nestworkadmin.api.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

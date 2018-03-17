@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Activity;
+package com.sebasaku.nestworkadmin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import com.sebasaku.nestworkadmin.Adapter.SlidingImageAdapter;
+import com.sebasaku.nestworkadmin.adapter.SlidingImageAdapter;
 import com.sebasaku.nestworkadmin.R;
 import com.viewpagerindicator.CirclePageIndicator;
 

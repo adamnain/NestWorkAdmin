@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Activity;
+package com.sebasaku.nestworkadmin.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

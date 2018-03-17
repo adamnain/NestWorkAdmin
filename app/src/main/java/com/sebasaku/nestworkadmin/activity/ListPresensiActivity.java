@@ -1,16 +1,14 @@
-package com.sebasaku.nestworkadmin.Activity;
+package com.sebasaku.nestworkadmin.activity;
 
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.sebasaku.nestworkadmin.Adapter.ListPresensiAdapter;
-import com.sebasaku.nestworkadmin.Model.Presensi;
+import com.sebasaku.nestworkadmin.adapter.ListPresensiAdapter;
+import com.sebasaku.nestworkadmin.model.Presensi;
 import com.sebasaku.nestworkadmin.R;
 
 import java.util.LinkedList;

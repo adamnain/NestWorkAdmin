@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Fragment;
+package com.sebasaku.nestworkadmin.fragment;
 
 
 import android.os.Bundle;

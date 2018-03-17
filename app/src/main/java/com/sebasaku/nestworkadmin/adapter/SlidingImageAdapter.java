@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Adapter;
+package com.sebasaku.nestworkadmin.adapter;
 
 import android.content.Context;
 import android.os.Parcelable;

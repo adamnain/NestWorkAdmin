@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Model;
+package com.sebasaku.nestworkadmin.model;
 
 /**
  * Created by adam on 2/23/18.

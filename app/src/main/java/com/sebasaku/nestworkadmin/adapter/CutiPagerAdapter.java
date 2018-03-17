@@ -1,11 +1,11 @@
-package com.sebasaku.nestworkadmin.Adapter;
+package com.sebasaku.nestworkadmin.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.sebasaku.nestworkadmin.Fragment.PermintaanCutiFragment;
-import com.sebasaku.nestworkadmin.Fragment.RiwayatCutiFragment;
+import com.sebasaku.nestworkadmin.fragment.PermintaanCutiFragment;
+import com.sebasaku.nestworkadmin.fragment.RiwayatCutiFragment;
 
 /**
  * Created by adamnain on 3/12/18.

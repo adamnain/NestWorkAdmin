@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.Activity;
+package com.sebasaku.nestworkadmin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sebasaku.nestworkadmin.Adapter.ListKaryawanAdapter;
-import com.sebasaku.nestworkadmin.Model.Karyawan;
+import com.sebasaku.nestworkadmin.adapter.ListKaryawanAdapter;
+import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
 import java.util.LinkedList;
