@@ -12,7 +12,7 @@ import com.sebasaku.nestworkadmin.api.model.TokenLogin;
 import com.sebasaku.nestworkadmin.api.model.Login;
 import com.sebasaku.nestworkadmin.api.model.Token;
 import com.sebasaku.nestworkadmin.R;
-import com.sebasaku.nestworkadmin.api.service.UserClient;
+import com.sebasaku.nestworkadmin.api.service.EndPoints;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,13 +22,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // retrofit belum dirapihin
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl("http://192.168.56.1:3000/")
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
 
-    UserClient userClient = retrofit.create(UserClient.class);
+    EndPoints endPoints = retrofit.create(EndPoints.class);
+
+    //session manager
+    SessionManager session;
+
 
     Button login;
     EditText email, password;
@@ -39,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initialized();
         actionClicked();
+        session  = new SessionManager(getApplicationContext());
+        session.checkLoginPage();
+
     }
 
     public void initialized(){
@@ -62,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String em, String pass){
         Login login = new Login(em, pass);
-        Call<TokenLogin> call = userClient.login(login);
+        Call<TokenLogin> call = endPoints.login(login);
 
         call.enqueue(new Callback<TokenLogin>() {
             @Override
@@ -70,8 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Token token = response.body().getToken();
                     String accesToken = token.getAccessToken();
+                    session.createLoginSession(accesToken);
                     //String id = response.body().getToken().toString();
-                    Toast.makeText(LoginActivity.this, accesToken, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, accesToken, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this,MenuActivity.class);
                     startActivity(i);
                 }

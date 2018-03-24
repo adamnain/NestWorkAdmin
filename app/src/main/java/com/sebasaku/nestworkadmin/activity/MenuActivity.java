@@ -7,12 +7,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.adapter.SlidingImageAdapter;
 import com.sebasaku.nestworkadmin.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,6 +27,8 @@ public class MenuActivity extends AppCompatActivity {
 
     CardView karyawan ,slipGaji,Cuti,infoPerusahaan,presensiHarian;
 
+    SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +36,8 @@ public class MenuActivity extends AppCompatActivity {
         initSlider();
         initializedObject();
         actionClicked();
+        sessionCheck();
     }
-
-
 
 
     private void initSlider() {
@@ -142,6 +145,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    public void sessionCheck(){
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+        String token = session.getAccesToken();
+        Toast.makeText(MenuActivity.this, token, Toast.LENGTH_LONG).show();
+
     }
 
 }

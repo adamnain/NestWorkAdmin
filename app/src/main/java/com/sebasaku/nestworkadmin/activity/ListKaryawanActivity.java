@@ -8,12 +8,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.adapter.ListKaryawanAdapter;
+import com.sebasaku.nestworkadmin.api.model.AllUser;
+import com.sebasaku.nestworkadmin.api.model.TokenLogin;
+import com.sebasaku.nestworkadmin.api.service.EndPoints;
 import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
 import java.util.LinkedList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by adam on 2/23/18.
@@ -34,9 +45,37 @@ public class ListKaryawanActivity extends AppCompatActivity {
         initialized();
         backButton();
         actionClicked();
+        //retrofit
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://192.168.56.1:3000/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        EndPoints endPoints = retrofit.create(EndPoints.class);
+
+        //final AllUser allUser = new AllUser();
+        Call<ResponseBody> call = endPoints.getAllUser("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQwNTkwMDcsImlhdCI6MTUyMTQ2NzAwNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.2waDJts8RrstGYwtIJiKZu6I6EUPeV34Yff--M_wAXk");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    //String email = response.body().
+                    listKaryawan.addLast(new Karyawan(email, R.drawable.jesica));
+                }
+                else {
+                    Toast.makeText(ListKaryawanActivity.this, "not correct", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ListKaryawanActivity.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //set data
-        listKaryawan.addLast(new Karyawan("Jesica Henwick", R.drawable.jesica));
         listKaryawan.addLast(new Karyawan("Lorem Ipsum", R.drawable.ic_history));
 
 
@@ -79,4 +118,5 @@ public class ListKaryawanActivity extends AppCompatActivity {
             }
         });
     }
+
 }

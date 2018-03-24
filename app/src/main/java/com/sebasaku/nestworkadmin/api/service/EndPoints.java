@@ -14,13 +14,13 @@ import retrofit2.http.POST;
  * Created by adamnain on 3/15/18.
  */
 
-public interface UserClient {
+public interface EndPoints {
 
     @POST("api/auth/login")
     Call<TokenLogin> login(@Body Login login);
 
     @GET("api/users")
-    Call<ResponseBody> getSecret(@Header("Authorization") String authToken);
+    Call<ResponseBody> getAllUser(@Header("Authorization") String authToken);
 
 
 }
