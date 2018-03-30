@@ -1,5 +1,6 @@
 package com.sebasaku.nestworkadmin.api.service;
 
+import com.sebasaku.nestworkadmin.api.model.AllUser;
 import com.sebasaku.nestworkadmin.api.model.TokenLogin;
 import com.sebasaku.nestworkadmin.api.model.Login;
 
@@ -20,7 +21,7 @@ public interface EndPoints {
     Call<TokenLogin> login(@Body Login login);
 
     @GET("api/users")
-    Call<ResponseBody> getAllUser(@Header("Authorization") String authToken);
+    Call<AllUser> getAllUser(@Header("Authorization") String authToken);
 
 
 }

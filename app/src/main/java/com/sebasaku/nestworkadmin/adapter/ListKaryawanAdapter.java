@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sebasaku.nestworkadmin.activity.DetailKaryawanActivity;
+import com.sebasaku.nestworkadmin.api.model.AllUser;
 import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
@@ -20,50 +21,50 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by adam on 2/23/18.
  */
 
-public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapter.ListKaryawanViewHolder> {
+public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapter.ListAllUserViewHolder> {
     //deklarasi global variabel
     private Context context;
-    private final LinkedList<Karyawan> listKaryawan;
+    private final LinkedList<AllUser> listAllUser;
 
     //konstruktor untuk menerima data adapter
-    public ListKaryawanAdapter(Context context, LinkedList<Karyawan> listKaryawan) {
+    public ListKaryawanAdapter(Context context, LinkedList<AllUser> listAllUser) {
         this.context = context;
-        this.listKaryawan = listKaryawan;
+        this.listAllUser = listAllUser;
     }
 
     //view holder berfungsi untuk setting list item yang digunakan
     @Override
-    public ListKaryawanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListAllUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_karyawan, null, false);
 
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mItemView.setLayoutParams(layoutParams);
 
-        return new ListKaryawanViewHolder(mItemView, this);
+        return new ListAllUserViewHolder(mItemView, this);
     }
 
     //bind view holder berfungsi untuk set data ke view yang ditampilkan pada list item
     @Override
-    public void onBindViewHolder(ListKaryawanViewHolder holder, int position) {
-        final Karyawan mCurrent = listKaryawan.get(position);
-        holder.namaUser.setText(mCurrent.getNamaKaryawan());
-        holder.avaUser.setImageResource(mCurrent.getAvaKaryawan());
+    public void onBindViewHolder(ListAllUserViewHolder holder, int position) {
+        final AllUser mCurrent = listAllUser.get(position);
+        holder.namaUser.setText(mCurrent.getNama());
+        holder.avaUser.setImageResource(1);
     }
 
     //untuk menghitung jumlah data yang ada pada list
     @Override
     public int getItemCount() {
-        return listKaryawan.size();
+        return listAllUser.size();
     }
 
-    public class ListKaryawanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListAllUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView namaUser;
         private CircleImageView avaUser;
 
         final ListKaryawanAdapter mAdapter;
 
         //untuk casting view yang digunakan pada list item
-        public ListKaryawanViewHolder(View itemView, ListKaryawanAdapter adapter) {
+        public ListAllUserViewHolder(View itemView, ListKaryawanAdapter adapter) {
             super(itemView);
             context = itemView.getContext();
             namaUser = (TextView) itemView.findViewById(R.id.namaUser);
@@ -76,12 +77,12 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
         @Override
         public void onClick(View view) {
             int mPosition = getLayoutPosition();
-            Karyawan element = listKaryawan.get(mPosition);
+            AllUser element = listAllUser.get(mPosition);
 
             //intent ke main activity dengan passing data
             Intent i = new Intent(context, DetailKaryawanActivity.class);
-            i.putExtra("namaUser", element.getNamaKaryawan());
-            i.putExtra("avaUser", element.getAvaKaryawan());
+            i.putExtra("namaUser", element.getNama());
+            i.putExtra("avaUser", 1);
             context.startActivity(i);
             mAdapter.notifyDataSetChanged();
         }

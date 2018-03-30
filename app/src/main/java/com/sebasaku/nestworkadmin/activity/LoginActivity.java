@@ -8,11 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sebasaku.nestworkadmin.SessionManager;
 import com.sebasaku.nestworkadmin.api.model.TokenLogin;
 import com.sebasaku.nestworkadmin.api.model.Login;
 import com.sebasaku.nestworkadmin.api.model.Token;
 import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.service.EndPoints;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,17 +24,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // retrofit belum dirapihin
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("http://192.168.56.1:3000/")
-            .addConverterFactory(GsonConverterFactory.create());
-
-    Retrofit retrofit = builder.build();
-
-    EndPoints endPoints = retrofit.create(EndPoints.class);
-
     //session manager
     SessionManager session;
+
+    UtilsApi utilsApi = new UtilsApi();
 
 
     Button login;
@@ -70,8 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String em, String pass){
         Login login = new Login(em, pass);
-        Call<TokenLogin> call = endPoints.login(login);
-
+        Call<TokenLogin> call = utilsApi.getAPIService().login(login);
         call.enqueue(new Callback<TokenLogin>() {
             @Override
             public void onResponse(Call<TokenLogin> call, Response<TokenLogin> response) {

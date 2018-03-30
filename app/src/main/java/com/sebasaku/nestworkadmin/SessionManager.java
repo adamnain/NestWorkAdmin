@@ -1,8 +1,11 @@
-package com.sebasaku.nestworkadmin.activity;
+package com.sebasaku.nestworkadmin;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import com.sebasaku.nestworkadmin.activity.LoginActivity;
+import com.sebasaku.nestworkadmin.activity.MenuActivity;
 
 import java.util.HashMap;
 

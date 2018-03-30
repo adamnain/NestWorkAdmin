@@ -9,12 +9,12 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sebasaku.nestworkadmin.SessionManager;
 import com.sebasaku.nestworkadmin.adapter.SlidingImageAdapter;
 import com.sebasaku.nestworkadmin.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 

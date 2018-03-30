@@ -14,10 +14,12 @@ import com.sebasaku.nestworkadmin.adapter.ListKaryawanAdapter;
 import com.sebasaku.nestworkadmin.api.model.AllUser;
 import com.sebasaku.nestworkadmin.api.model.TokenLogin;
 import com.sebasaku.nestworkadmin.api.service.EndPoints;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -31,11 +33,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ListKaryawanActivity extends AppCompatActivity {
-    private final LinkedList<Karyawan> listKaryawan = new LinkedList<>();
+    private final LinkedList<AllUser> listKaryawan = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
     private ListKaryawanAdapter mAdapter;
     FloatingActionButton fab;
+    UtilsApi utilsApi = new UtilsApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,38 +48,41 @@ public class ListKaryawanActivity extends AppCompatActivity {
         initialized();
         backButton();
         actionClicked();
-        //retrofit
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.56.1:3000/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
-        EndPoints endPoints = retrofit.create(EndPoints.class);
-
-        //final AllUser allUser = new AllUser();
-        Call<ResponseBody> call = endPoints.getAllUser("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQwNTkwMDcsImlhdCI6MTUyMTQ2NzAwNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.2waDJts8RrstGYwtIJiKZu6I6EUPeV34Yff--M_wAXk");
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<AllUser> call = utilsApi.getAPIService().getAllUser("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ5MTA2MzYsImlhdCI6MTUyMjMxODYzNiwic3ViIjoiNWFiY2I2ZDhkMTQ2YWI2OTJmY2UzZGIwIn0.m2Hzc2xAb9tB4ERVMwX9oMyuXh6JHfP6tAoDlZI2mHE");
+        call.enqueue(new Callback<AllUser>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<AllUser> call, Response<AllUser> response) {
                 if (response.isSuccessful()){
-                    //String email = response.body().
-                    listKaryawan.addLast(new Karyawan(email, R.drawable.jesica));
+                    String id = response.body().getId();
+                    String email = response.body().getEmail();
+                    String nama = response.body().getNama();
+                    String posisi = response.body().getPosisi();
+                    String noHp = response.body().getNoHp();
+                    int gaji = response.body().getGaji();
+                    String createdAt = response.body().getCreatedAt();
+                    String level = response.body().getLevel();
+                    String picture = response.body().getPicture();
+
+                    listKaryawan.add(new AllUser(id, email, nama, posisi, noHp, gaji, createdAt, level, picture));
+                    //listKaryawan.addLast(new Karyawan(, R.drawable.jesica));
+                    Toast.makeText(ListKaryawanActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     Toast.makeText(ListKaryawanActivity.this, "not correct", Toast.LENGTH_SHORT).show();
-
                 }
 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<AllUser> call, Throwable t) {
                 Toast.makeText(ListKaryawanActivity.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
 
         //set data
-        listKaryawan.addLast(new Karyawan("Lorem Ipsum", R.drawable.ic_history));
+        //listKaryawan.addLast(new A("Lorem Ipsum", R.drawable.ic_history));
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list_karyawan);
