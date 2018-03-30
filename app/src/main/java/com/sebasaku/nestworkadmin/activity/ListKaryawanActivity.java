@@ -38,7 +38,6 @@ public class ListKaryawanActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ListKaryawanAdapter mAdapter;
     FloatingActionButton fab;
-    UtilsApi utilsApi = new UtilsApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +48,9 @@ public class ListKaryawanActivity extends AppCompatActivity {
         backButton();
         actionClicked();
 
-        Call<AllUser> call = utilsApi.getAPIService().getAllUser("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ5MTA2MzYsImlhdCI6MTUyMjMxODYzNiwic3ViIjoiNWFiY2I2ZDhkMTQ2YWI2OTJmY2UzZGIwIn0.m2Hzc2xAb9tB4ERVMwX9oMyuXh6JHfP6tAoDlZI2mHE");
-        call.enqueue(new Callback<AllUser>() {
+        String accesToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ5MTA2MzYsImlhdCI6MTUyMjMxODYzNiwic3ViIjoiNWFiY2I2ZDhkMTQ2YWI2OTJmY2UzZGIwIn0.m2Hzc2xAb9tB4ERVMwX9oMyuXh6JHfP6tAoDlZI2mHE";
+        //Call<AllUser> call = utilsApi.getAPIService().getAllUser(accesToken);
+        UtilsApi.getAPIService().getAllUser(accesToken).enqueue(new Callback<AllUser>() {
             @Override
             public void onResponse(Call<AllUser> call, Response<AllUser> response) {
                 if (response.isSuccessful()){
@@ -77,6 +77,7 @@ public class ListKaryawanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AllUser> call, Throwable t) {
+
                 Toast.makeText(ListKaryawanActivity.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
