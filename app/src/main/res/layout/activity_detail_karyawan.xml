@@ -67,7 +67,7 @@
                 android:background="@color/colorDivider" />
 
             <TextView
-                android:id="@+id/namaUser"
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginTop_detailKaryawan_tv"
@@ -84,7 +84,7 @@
                 android:background="@color/colorDivider" />
 
             <TextView
-                android:id="@+id/namaUser"
+                android:id="@+id/tanggalLahir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginTop_detailKaryawan_tv"
@@ -101,7 +101,7 @@
                 android:background="@color/colorDivider" />
 
             <TextView
-                android:id="@+id/namaUser"
+                android:id="@+id/hp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginTop_detailKaryawan_tv"

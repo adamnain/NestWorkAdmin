@@ -10,30 +10,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.sebasaku.nestworkadmin.SessionManager;
 import com.sebasaku.nestworkadmin.adapter.ListKaryawanAdapter;
 import com.sebasaku.nestworkadmin.api.model.AllUser;
-import com.sebasaku.nestworkadmin.api.model.TokenLogin;
-import com.sebasaku.nestworkadmin.api.service.EndPoints;
+import com.sebasaku.nestworkadmin.api.model.AllUserResponse;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
-import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by adam on 2/23/18.
  */
 
 public class ListKaryawanActivity extends AppCompatActivity {
-    private final LinkedList<AllUser> listKaryawan = new LinkedList<>();
+    private List<AllUser> listKaryawan;
 
     private RecyclerView mRecyclerView;
     private ListKaryawanAdapter mAdapter;
@@ -44,46 +45,45 @@ public class ListKaryawanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_karyawan);
 
+        listKaryawan = new ArrayList<>();
+
         initialized();
         backButton();
         actionClicked();
 
-        String accesToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ5MTA2MzYsImlhdCI6MTUyMjMxODYzNiwic3ViIjoiNWFiY2I2ZDhkMTQ2YWI2OTJmY2UzZGIwIn0.m2Hzc2xAb9tB4ERVMwX9oMyuXh6JHfP6tAoDlZI2mHE";
-        //Call<AllUser> call = utilsApi.getAPIService().getAllUser(accesToken);
-        UtilsApi.getAPIService().getAllUser(accesToken).enqueue(new Callback<AllUser>() {
+        SessionManager userPref = new SessionManager(getApplicationContext());
+        //String accesToken = userPref.getAccesToken();
+        java.lang.String accesToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjUxNDcwMjcsImlhdCI6MTUyMjU1NTAyNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.sl-IiWn4QWao_d2bzF6UW9-m9mIBPcIANyZAn5XGeks";
+
+        Call<List<AllUser>> call = UtilsApi.getAPIService().getAllUser("Bearer "+accesToken);
+        call.enqueue(new Callback<List<AllUser>>() {
             @Override
-            public void onResponse(Call<AllUser> call, Response<AllUser> response) {
-                if (response.isSuccessful()){
-                    String id = response.body().getId();
-                    String email = response.body().getEmail();
-                    String nama = response.body().getNama();
-                    String posisi = response.body().getPosisi();
-                    String noHp = response.body().getNoHp();
-                    int gaji = response.body().getGaji();
-                    String createdAt = response.body().getCreatedAt();
-                    String level = response.body().getLevel();
-                    String picture = response.body().getPicture();
-
-                    listKaryawan.add(new AllUser(id, email, nama, posisi, noHp, gaji, createdAt, level, picture));
-                    //listKaryawan.addLast(new Karyawan(, R.drawable.jesica));
-                    Toast.makeText(ListKaryawanActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
-
+            public void onResponse(Call<List<AllUser>> call, Response<List<AllUser>> response) {
+                Toast.makeText(ListKaryawanActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
+                if (response.code()==200){
+                    List<AllUser> allUser = response.body();
+                    for(int i = 0; i<allUser.size(); i++){
+                        String id = allUser.get(i).getId();
+                        String email = allUser.get(i).getEmail();
+                        String nama = allUser.get(i).getNama();
+                        String posisi = allUser.get(i).getPosisi();
+                        String noHp = allUser.get(i).getNoHp();
+                        int gaji = allUser.get(i).getGaji();
+                        String createdAt = allUser.get(i).getCreatedAt();
+                        listKaryawan.add(new AllUser(id, email, nama, posisi, noHp, gaji, createdAt));
+                        mAdapter.notifyDataSetChanged();
+                    }
                 }
                 else {
                     Toast.makeText(ListKaryawanActivity.this, "not correct", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
-            public void onFailure(Call<AllUser> call, Throwable t) {
-
-                Toast.makeText(ListKaryawanActivity.this, "error", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<AllUser>> call, Throwable t) {
+                Toast.makeText(ListKaryawanActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //set data
-        //listKaryawan.addLast(new A("Lorem Ipsum", R.drawable.ic_history));
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list_karyawan);

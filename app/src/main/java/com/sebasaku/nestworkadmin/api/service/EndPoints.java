@@ -1,10 +1,12 @@
 package com.sebasaku.nestworkadmin.api.service;
 
 import com.sebasaku.nestworkadmin.api.model.AllUser;
+import com.sebasaku.nestworkadmin.api.model.AllUserResponse;
 import com.sebasaku.nestworkadmin.api.model.TokenLogin;
 import com.sebasaku.nestworkadmin.api.model.Login;
 
-import okhttp3.ResponseBody;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -21,7 +23,7 @@ public interface EndPoints {
     Call<TokenLogin> login(@Body Login login);
 
     @GET("api/users")
-    Call<AllUser> getAllUser(@Header("Authorization") String authToken);
+    Call<List<AllUser>> getAllUser(@Header("Authorization") String authToken);
 
 
 }

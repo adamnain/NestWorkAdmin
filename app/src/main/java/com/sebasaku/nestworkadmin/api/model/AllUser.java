@@ -22,38 +22,12 @@ public class AllUser {
     private String noHp;
     @SerializedName("gaji")
     @Expose
-    private Integer gaji;
+    private int gaji;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
-    @SerializedName("level")
-    @Expose
-    private String level;
-    @SerializedName("picture")
-    @Expose
-    private String picture;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-    public AllUser() {
-    }
-
-    /**
-     *
-     * @param picture
-     * @param id
-     * @param level
-     * @param posisi
-     * @param email
-     * @param createdAt
-     * @param gaji
-     * @param noHp
-     * @param nama
-     */
-    public AllUser(String id, String email, String nama, String posisi, String noHp, Integer gaji, String createdAt, String level, String picture) {
-        super();
+    public AllUser(String id, String email, String nama, String posisi, String noHp, int gaji, String createdAt) {
         this.id = id;
         this.email = email;
         this.nama = nama;
@@ -61,8 +35,6 @@ public class AllUser {
         this.noHp = noHp;
         this.gaji = gaji;
         this.createdAt = createdAt;
-        this.level = level;
-        this.picture = picture;
     }
 
     public String getId() {
@@ -105,11 +77,11 @@ public class AllUser {
         this.noHp = noHp;
     }
 
-    public Integer getGaji() {
+    public int getGaji() {
         return gaji;
     }
 
-    public void setGaji(Integer gaji) {
+    public void setGaji(int gaji) {
         this.gaji = gaji;
     }
 
@@ -119,22 +91,6 @@ public class AllUser {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
 }

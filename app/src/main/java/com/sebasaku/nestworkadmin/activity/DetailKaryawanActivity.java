@@ -13,7 +13,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DetailKaryawanActivity extends AppCompatActivity {
 
     CircleImageView avaUser;
-    TextView namaUser;
+    TextView namaUser, jobUser, email, tanggalLahir, hp;
     CardView cardView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +22,31 @@ public class DetailKaryawanActivity extends AppCompatActivity {
 
         backButton();
         intializedObject();
+        getIntentData();
 
         avaUser.setElevation(10);
         cardView.setElevation(5);
 
+
+    }
+    private void getIntentData(){
         avaUser.setImageResource(getIntent().getIntExtra("avaUser",0));
         namaUser.setText(getIntent().getStringExtra("namaUser"));
+        jobUser.setText(getIntent().getShortExtra("posisi"));
+        email.setText(getIntent().getShortExtra("email"));
+        tanggalLahir.setText(getIntent().getShortExtra("tanggalLahir"));
+        hp.setText(getIntent().getShortExtra("hp"));
     }
 
     public void intializedObject(){
         avaUser = (CircleImageView) findViewById(R.id.avaUser);
         namaUser = (TextView) findViewById(R.id.namaUser);
         cardView = (CardView) findViewById(R.id.cardView);
+        jobUser = (TextView) findViewById(R.id.jobUser);
+        email = (TextView) findViewById(R.id.email);
+        tanggalLahir = (TextView) findViewById(R.id.tanggalLahir);
+        hp = (TextView) findViewById(R.id.hp);
+
     }
 
     //untuk enampilkan back button

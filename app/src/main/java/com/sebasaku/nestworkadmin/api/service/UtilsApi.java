@@ -5,7 +5,8 @@ package com.sebasaku.nestworkadmin.api.service;
  */
 public class UtilsApi {
 
-    public static final String BASE_URL_API = "http://149.129.212.12:3000/";
+    //public static final String BASE_URL_API = "http://149.129.212.12:3000/";
+    public static final String BASE_URL_API = "http://10.0.3.2:3000/";
 
     // Mendeklarasikan Interface BaseApiService
     public static EndPoints getAPIService(){

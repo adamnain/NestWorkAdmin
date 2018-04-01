@@ -14,6 +14,7 @@ import com.sebasaku.nestworkadmin.model.Karyawan;
 import com.sebasaku.nestworkadmin.R;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -24,10 +25,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapter.ListAllUserViewHolder> {
     //deklarasi global variabel
     private Context context;
-    private final LinkedList<AllUser> listAllUser;
+    private final List<AllUser> listAllUser;
 
     //konstruktor untuk menerima data adapter
-    public ListKaryawanAdapter(Context context, LinkedList<AllUser> listAllUser) {
+    public ListKaryawanAdapter(Context context, List<AllUser> listAllUser) {
         this.context = context;
         this.listAllUser = listAllUser;
     }
@@ -83,6 +84,10 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
             Intent i = new Intent(context, DetailKaryawanActivity.class);
             i.putExtra("namaUser", element.getNama());
             i.putExtra("avaUser", 1);
+            i.putExtra("posisi", element.getPosisi());
+            i.putExtra("email",element.getEmail());
+            i.putExtra("tanggalLahir",element.getNoHp());
+            i.putExtra("hp",element.getNoHp());
             context.startActivity(i);
             mAdapter.notifyDataSetChanged();
         }
