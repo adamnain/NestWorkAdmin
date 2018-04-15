@@ -1,5 +1,4 @@
-/*
-package com.sebasaku.nestworkadmin.Adapter;
+package com.sebasaku.nestworkadmin.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,28 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.sebasaku.nestworkadmin.Activity.DetailKaryawanActivity;
-import com.sebasaku.nestworkadmin.Model.Cuti;
 import com.sebasaku.nestworkadmin.R;
-
+import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
+import com.sebasaku.nestworkadmin.model.Cuti;
 import java.util.LinkedList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-*/
-/**
- * Created by adamnain on 3/13/18.
- *//*
 
 
 public class ListCutiAdapter extends RecyclerView.Adapter<ListCutiAdapter.ListCutiViewHolder>  {
     //deklarasi global variabel
     private Context context;
-    private final LinkedList<Cuti> listCuti;
+    private final List<ResponsCuti> listCuti;
 
     //konstruktor untuk menerima data adapter
-    public ListCutiAdapter(Context context, LinkedList<Cuti> listCuti) {
+    public ListCutiAdapter(Context context, List<ResponsCuti> listCuti) {
         this.context = context;
         this.listCuti = listCuti;
     }
@@ -42,15 +36,17 @@ public class ListCutiAdapter extends RecyclerView.Adapter<ListCutiAdapter.ListCu
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mItemView.setLayoutParams(layoutParams);
 
-        return new ListCutiAdapter.ListKaryawanViewHolder(mItemView, this);
+        return new ListCutiAdapter.ListCutiViewHolder(mItemView, this);
     }
 
     //bind view holder berfungsi untuk set data ke view yang ditampilkan pada list item
     @Override
     public void onBindViewHolder(ListCutiAdapter.ListCutiViewHolder holder, int position) {
-        final Cuti mCurrent = listCuti.get(position);
-        holder.namaUser.setText(mCurrent.getNamaCuti());
-        holder.avaUser.setImageResource(mCurrent.getAvaCuti());
+        final ResponsCuti mCurrent = listCuti.get(position);
+        holder.namaKaryawan.setText(mCurrent.getNama());
+        holder.awalCuti.setText(mCurrent.getAwalCuti());
+        holder.akhirCuti.setText(mCurrent.getAkhirCuti());
+        holder.keterangaCuti.setText(mCurrent.getKeterangan());
     }
 
     //untuk menghitung jumlah data yang ada pada list
@@ -60,7 +56,7 @@ public class ListCutiAdapter extends RecyclerView.Adapter<ListCutiAdapter.ListCu
     }
 
     public class ListCutiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView namaUser;
+        private TextView namaKaryawan, awalCuti, akhirCuti, keterangaCuti;
         private CircleImageView avaUser;
 
         final ListCutiAdapter mAdapter;
@@ -69,8 +65,10 @@ public class ListCutiAdapter extends RecyclerView.Adapter<ListCutiAdapter.ListCu
         public ListCutiViewHolder(View itemView, ListCutiAdapter adapter) {
             super(itemView);
             context = itemView.getContext();
-            namaUser = (TextView) itemView.findViewById(R.id.namaUser);
-            avaUser = (CircleImageView) itemView.findViewById(R.id.avaUser);
+            namaKaryawan = itemView.findViewById(R.id.tv_cuti_namaKaryawan);
+            awalCuti = itemView.findViewById(R.id.tv_cuti_awalCuti);
+            akhirCuti = itemView.findViewById(R.id.tv_cuti_akhirCuti);
+            keterangaCuti = itemView.findViewById(R.id.tv_cuti_keterangan);
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
         }
@@ -79,16 +77,15 @@ public class ListCutiAdapter extends RecyclerView.Adapter<ListCutiAdapter.ListCu
         @Override
         public void onClick(View view) {
             int mPosition = getLayoutPosition();
-            Cuti element = listCuti.get(mPosition);
+            ResponsCuti element = listCuti.get(mPosition);
 
             //intent ke main activity dengan passing data
-            Intent i = new Intent(context, DetailCutiActivity.class);
-            i.putExtra("namaUser", element.getNamaCuti());
-            i.putExtra("avaUser", element.getAvaCuti());
-            context.startActivity(i);
-            mAdapter.notifyDataSetChanged();
+//            Intent i = new Intent(context, DetailCutiActivity.class);
+//            i.putExtra("namaUser", element.getNamaCuti());
+//            i.putExtra("avaUser", element.getAvaCuti());
+//            context.startActivity(i);
+//            mAdapter.notifyDataSetChanged();
         }
     }
 
 }
-*/

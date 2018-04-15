@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.sebasaku.nestworkadmin.SessionManager;
 import com.sebasaku.nestworkadmin.adapter.ListKaryawanAdapter;
 import com.sebasaku.nestworkadmin.api.model.AllUser;
-import com.sebasaku.nestworkadmin.api.model.AllUserResponse;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.R;
 
@@ -35,7 +34,6 @@ import retrofit2.Response;
 
 public class ListKaryawanActivity extends AppCompatActivity {
     private List<AllUser> listKaryawan;
-
     private RecyclerView mRecyclerView;
     private ListKaryawanAdapter mAdapter;
     FloatingActionButton fab;
@@ -52,8 +50,8 @@ public class ListKaryawanActivity extends AppCompatActivity {
         actionClicked();
 
         SessionManager userPref = new SessionManager(getApplicationContext());
-        //String accesToken = userPref.getAccesToken();
-        java.lang.String accesToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjUxNDcwMjcsImlhdCI6MTUyMjU1NTAyNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.sl-IiWn4QWao_d2bzF6UW9-m9mIBPcIANyZAn5XGeks";
+        String accesToken = userPref.getAccesToken();
+        //java.lang.String accesToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjUxNDcwMjcsImlhdCI6MTUyMjU1NTAyNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.sl-IiWn4QWao_d2bzF6UW9-m9mIBPcIANyZAn5XGeks";
 
         Call<List<AllUser>> call = UtilsApi.getAPIService().getAllUser("Bearer "+accesToken);
         call.enqueue(new Callback<List<AllUser>>() {

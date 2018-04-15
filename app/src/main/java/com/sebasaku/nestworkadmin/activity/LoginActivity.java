@@ -3,6 +3,8 @@ package com.sebasaku.nestworkadmin.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +26,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //session manager
     SessionManager session;
-
-    UtilsApi utilsApi = new UtilsApi();
-
-
+    UtilsApi utilsApi;
     Button login;
     EditText email, password;
 
@@ -64,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String token;
 
     private void login(String em, String pass){
+        utilsApi = new UtilsApi();
         Login login = new Login(em, pass);
         Call<TokenLogin> call = utilsApi.getAPIService().login(login);
         call.enqueue(new Callback<TokenLogin>() {
@@ -90,5 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }

@@ -49,7 +49,8 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
     public void onBindViewHolder(ListAllUserViewHolder holder, int position) {
         final AllUser mCurrent = listAllUser.get(position);
         holder.namaUser.setText(mCurrent.getNama());
-        holder.avaUser.setImageResource(1);
+        holder.avaUser.setImageResource(R.drawable.user);
+        holder.jobUser.setText(mCurrent.getPosisi());
     }
 
     //untuk menghitung jumlah data yang ada pada list
@@ -59,7 +60,7 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
     }
 
     public class ListAllUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView namaUser;
+        private TextView namaUser, jobUser;
         private CircleImageView avaUser;
 
         final ListKaryawanAdapter mAdapter;
@@ -70,6 +71,7 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
             context = itemView.getContext();
             namaUser = (TextView) itemView.findViewById(R.id.namaUser);
             avaUser = (CircleImageView) itemView.findViewById(R.id.avaUser);
+            jobUser = (TextView) itemView.findViewById(R.id.jobUser);
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
         }
@@ -83,7 +85,7 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
             //intent ke main activity dengan passing data
             Intent i = new Intent(context, DetailKaryawanActivity.class);
             i.putExtra("namaUser", element.getNama());
-            i.putExtra("avaUser", 1);
+            i.putExtra("avaUser", R.drawable.user);
             i.putExtra("posisi", element.getPosisi());
             i.putExtra("email",element.getEmail());
             i.putExtra("tanggalLahir",element.getNoHp());

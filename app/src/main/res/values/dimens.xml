@@ -38,7 +38,10 @@
     <dimen name="marginTop_detailKaryawan_linear">20dp</dimen>
     <dimen name="padding_detailKaryawan_linear">8dp</dimen>
     <dimen name="height_itemKaryawan_cv">70dp</dimen>
-    <dimen name="marginLeft_item_cv">4dp</dimen>
+    <dimen name="marginLeft_item_cv">8dp</dimen>
     <dimen name="marginTop_item_cv">4dp</dimen>
     <dimen name="paddingSide_listItemPresensi_cv">16dp</dimen>
+    <dimen name="avaList">60dp</dimen>
+    <dimen name="marginAvaList">2dp</dimen>
+    <dimen name="paddingList">2dp</dimen>
 </resources>

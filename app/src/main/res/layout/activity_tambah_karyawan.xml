@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_tambahKaryawan_Judul"
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nama" />
@@ -41,6 +43,8 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_tanggalLahir"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/tanggal_lahir"
@@ -53,29 +57,20 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_bidang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bidang_developer" />
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
-
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_hp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/no_hp"
@@ -101,10 +96,14 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
         </android.support.design.widget.TextInputLayout>
+
 
 
         <android.support.design.widget.TextInputLayout
@@ -112,6 +111,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
@@ -124,6 +124,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_repassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/re_type_password"
@@ -132,6 +133,7 @@
 
 
         <Button
+            android:id="@+id/bt_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/textSize_tambahKaryawan_Judul"

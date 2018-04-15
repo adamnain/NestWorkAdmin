@@ -1,5 +1,7 @@
 package com.sebasaku.nestworkadmin.activity;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -15,6 +17,7 @@ public class DetailKaryawanActivity extends AppCompatActivity {
     CircleImageView avaUser;
     TextView namaUser, jobUser, email, tanggalLahir, hp;
     CardView cardView;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +35,10 @@ public class DetailKaryawanActivity extends AppCompatActivity {
     private void getIntentData(){
         avaUser.setImageResource(getIntent().getIntExtra("avaUser",0));
         namaUser.setText(getIntent().getStringExtra("namaUser"));
-        jobUser.setText(getIntent().getShortExtra("posisi"));
-        email.setText(getIntent().getShortExtra("email"));
-        tanggalLahir.setText(getIntent().getShortExtra("tanggalLahir"));
-        hp.setText(getIntent().getShortExtra("hp"));
+        jobUser.setText(getIntent().getStringExtra("posisi"));
+        email.setText(getIntent().getStringExtra("email"));
+        tanggalLahir.setText(getIntent().getStringExtra("tanggalLahir"));
+        hp.setText(getIntent().getStringExtra("hp"));
     }
 
     public void intializedObject(){
