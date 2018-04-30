@@ -1,4 +1,4 @@
-package com.sebasaku.nestworkadmin.fragment;
+package com.sebasaku.nestworkadmin.ui.fragment;
 
 
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.R;
-import com.sebasaku.nestworkadmin.SessionManager;
-import com.sebasaku.nestworkadmin.adapter.ListCutiAdapter;
+import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.adapter.RequestCutiAdapter;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 
@@ -30,7 +30,7 @@ public class PermintaanCutiFragment extends Fragment {
     View v;
     private List<ResponsCuti> listRequestCuti;
     private RecyclerView mRecyclerView;
-    private ListCutiAdapter mAdapter;
+    private RequestCutiAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -84,7 +84,7 @@ public class PermintaanCutiFragment extends Fragment {
 
         mRecyclerView = v.findViewById(R.id.rv_list_cuti);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new ListCutiAdapter(getActivity(),listRequestCuti);
+        mAdapter = new RequestCutiAdapter(getActivity(),listRequestCuti);
         mRecyclerView.setAdapter(mAdapter);
         return v;
     }

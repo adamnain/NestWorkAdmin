@@ -33,5 +33,8 @@ public interface EndPoints {
     @GET("api/cuti/findByRespons/{respons}")
     Call<List<ResponsCuti>> findByRespons(@Header("Authorization") String authToken, @Path("respons") int respons);
 
+    @GET("api/cuti/accCuti/{id}")
+    Call<>
+
 
 }

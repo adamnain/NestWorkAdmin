@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,13 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MenuActivity" />
-        <activity android:name=".activity.DetailKaryawanActivity" />
-        <activity android:name=".activity.TambahKaryawanActivity" />
-        <activity android:name=".activity.ListKaryawanActivity" />
-        <activity android:name=".activity.ListPresensiActivity" />
+        <activity android:name=".ui.activity.MenuActivity" />
+        <activity android:name=".ui.activity.DetailKaryawanActivity" />
+        <activity android:name=".ui.activity.TambahKaryawanActivity" />
+        <activity android:name=".ui.activity.ListKaryawanActivity" />
+        <activity android:name=".ui.activity.ListPresensiActivity" />
         <activity
-            android:name=".activity.CutiActivity"
+            android:name=".ui.activity.CutiActivity"
             android:theme="@style/AppThemeNoActionBar"/>
     </application>
 
