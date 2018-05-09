@@ -3,6 +3,7 @@
     package="com.sebasaku.nestworkadmin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,7 +27,11 @@
         <activity android:name=".ui.activity.ListPresensiActivity" />
         <activity
             android:name=".ui.activity.CutiActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".ui.activity.SlipGajiActivity" />
+        <activity android:name=".ui.activity.ListSlipActivity" />
+        <activity android:name=".ui.activity.DetailSlipActivity" />
+        <activity android:name=".ui.activity.ProfilPerusahaanActivity"></activity>
     </application>
 
 </manifest>

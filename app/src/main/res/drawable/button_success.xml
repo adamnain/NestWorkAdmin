@@ -5,7 +5,7 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/colorGreen"/>
-            <corners android:radius="8dp"/>
+
             <stroke
                 android:width="2dip"
                 android:color="#66BB6A" />
@@ -17,7 +17,7 @@
     <item android:state_focused="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/colorGreen"/>
-            <corners android:radius="8dp"/>
+
             <stroke
                 android:width="2dip"
                 android:color="#81C784"/>
@@ -29,7 +29,7 @@
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="@color/colorWhite"/>
-            <corners android:radius="8dp"/>
+
             <stroke
                 android:width="2dip"
                 android:color="@color/colorGreen"/>

@@ -1,6 +1,7 @@
 package com.sebasaku.nestworkadmin.ui.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.R;
+import com.sebasaku.nestworkadmin.api.model.AccCuti;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
 import com.sebasaku.nestworkadmin.ui.adapter.RequestCutiAdapter;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
@@ -88,5 +90,6 @@ public class PermintaanCutiFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         return v;
     }
+
 
 }

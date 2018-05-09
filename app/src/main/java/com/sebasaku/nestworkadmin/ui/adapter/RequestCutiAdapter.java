@@ -1,24 +1,46 @@
 package com.sebasaku.nestworkadmin.ui.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.sebasaku.nestworkadmin.R;
+import com.sebasaku.nestworkadmin.api.model.AccCuti;
+import com.sebasaku.nestworkadmin.api.model.DecCuti;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
+//import com.sebasaku.nestworkadmin.ui.AccCutiService;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
+import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.CutiActivity;
+import com.sebasaku.nestworkadmin.ui.fragment.DetailPermintaanCutiFragment;
+import com.sebasaku.nestworkadmin.ui.fragment.PermintaanCutiFragment;
 
+import android.content.Intent;
+import android.widget.Toast;
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.ListCutiViewHolder>  {
     //deklarasi global variabel
     private Context context;
     private final List<ResponsCuti> listCuti;
+
 
     //konstruktor untuk menerima data adapter
     public RequestCutiAdapter(Context context, List<ResponsCuti> listCuti) {
@@ -56,6 +78,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
     public class ListCutiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView namaKaryawan, awalCuti, akhirCuti, keterangaCuti;
         private CircleImageView avaUser;
+        private Button btnAcc, btnDec;
 
         final RequestCutiAdapter mAdapter;
 
@@ -67,23 +90,70 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
             awalCuti = itemView.findViewById(R.id.tv_cuti_awalCuti);
             akhirCuti = itemView.findViewById(R.id.tv_cuti_akhirCuti);
             keterangaCuti = itemView.findViewById(R.id.tv_cuti_keterangan);
+            btnAcc = itemView.findViewById(R.id.btn_acc);
+            btnDec = itemView.findViewById(R.id.btn_dec);
             this.mAdapter = adapter;
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
+
+
+            btnAcc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    int mPosition = getLayoutPosition();
+                    ResponsCuti element = listCuti.get(mPosition);
+                    Toast.makeText(view.getContext(), element.getId(), Toast.LENGTH_SHORT).show();
+                    SessionManager userPref = new SessionManager(context);
+                    String accesToken = userPref.getAccesToken();
+                    Call<AccCuti> call = UtilsApi.getAPIService().accCuti("Bearer " + accesToken, element.getId());
+                    call.enqueue(new Callback<AccCuti>() {
+                        @Override
+                        public void onResponse(Call<AccCuti> call, Response<AccCuti> response) {
+                            //Toast.makeText(view.getContext(), "onRespon", Toast.LENGTH_SHORT).show();
+                            mAdapter.notifyDataSetChanged();
+
+//                            Intent i = new Intent(context,CutiActivity.class);
+//                            context.startActivities(new Intent[]{i});
+                        }
+
+                        @Override
+                        public void onFailure(Call<AccCuti> call, Throwable t) {
+                            //Toast.makeText(view.getContext(), "onFailure", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            });
+
+            btnDec.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int mPosition = getLayoutPosition();
+                    ResponsCuti element = listCuti.get(mPosition);
+                    Toast.makeText(view.getContext(), element.getId(), Toast.LENGTH_SHORT).show();
+                    SessionManager userPref = new SessionManager(context);
+                    String accesToken = userPref.getAccesToken();
+                    Call<DecCuti> call = UtilsApi.getAPIService().decCuti("Bearer " + accesToken, element.getId());
+                    call.enqueue(new Callback<DecCuti>() {
+                        @Override
+                        public void onResponse(Call<DecCuti> call, Response<DecCuti> response) {
+//                            Intent i = new Intent(context,CutiActivity.class);
+//                            context.startActivities(new Intent[]{i});
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFailure(Call<DecCuti> call, Throwable t) {
+
+                        }
+                    });
+                }
+            });
         }
 
-        //untuk menambah action click pada list item
         @Override
         public void onClick(View view) {
-            int mPosition = getLayoutPosition();
-            ResponsCuti element = listCuti.get(mPosition);
 
-            //intent ke main activity dengan passing data
-//            Intent i = new Intent(context, DetailCutiActivity.class);
-//            i.putExtra("namaUser", element.getNamaCuti());
-//            i.putExtra("avaUser", element.getAvaCuti());
-//            context.startActivity(i);
-//            mAdapter.notifyDataSetChanged();
         }
-    }
 
+    }
 }

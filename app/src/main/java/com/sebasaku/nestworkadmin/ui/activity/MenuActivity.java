@@ -112,32 +112,30 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-//        presensiHarian.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(MenuActivity.this,ListPresensiActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        slipGaji.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(MenuActivity.this,SlipGajiActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        infoPerusahaan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(MenuActivity.this,ProfilPerusahaanActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//
-//
+        presensiHarian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuActivity.this,ListPresensiActivity.class);
+                startActivity(i);
+            }
+        });
+
+        slipGaji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuActivity.this,ListSlipActivity.class);
+                startActivity(i);
+            }
+        });
+
+        infoPerusahaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuActivity.this,ProfilPerusahaanActivity.class);
+                startActivity(i);
+            }
+        });
+
         Cuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
