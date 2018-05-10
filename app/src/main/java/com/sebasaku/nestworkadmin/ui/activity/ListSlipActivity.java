@@ -50,18 +50,22 @@ public class ListSlipActivity extends AppCompatActivity {
                     List<SlipGaji> slip = response.body();
                     for(int i = 0; i<slip.size(); i++){
                         String status = slip.get(i).getStatus();
-                        int jumlahTask = slip.get(i).getJumlahTask();
-                        String id = slip.get(i).getId();
-                        String email = slip.get(i).getEmail();
-                        String waktu = slip.get(i).getWaktu();
-                        int gaji = slip.get(i).getGaji();
-                        String createdAt = slip.get(i).getCreatedAt();
-                        String updatedAt = slip.get(i).getUpdatedAt();
-                        int v = slip.get(i).getV();
+
+                        if (status.equals("0")){
+                            int jumlahTask = slip.get(i).getJumlahTask();
+                            String id = slip.get(i).getId();
+                            String email = slip.get(i).getEmail();
+                            String waktu = slip.get(i).getWaktu();
+                            int gaji = slip.get(i).getGaji();
+                            String createdAt = slip.get(i).getCreatedAt();
+                            String updatedAt = slip.get(i).getUpdatedAt();
+                            int v = slip.get(i).getV();
 
 
-                        listSlip.add(new SlipGaji(status, jumlahTask, id, email, waktu, gaji, createdAt, updatedAt, v));
-                        mAdapter.notifyDataSetChanged();
+                            listSlip.add(new SlipGaji(status, jumlahTask, id, email, waktu, gaji, createdAt, updatedAt, v));
+                            mAdapter.notifyDataSetChanged();
+                        }
+
                     }
                 }
                 else {

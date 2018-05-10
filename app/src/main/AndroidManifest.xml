@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MenuActivity" />
+        <activity android:name=".ui.activity.DashboardActivity" />
         <activity android:name=".ui.activity.DetailKaryawanActivity" />
         <activity android:name=".ui.activity.TambahKaryawanActivity" />
         <activity android:name=".ui.activity.ListKaryawanActivity" />

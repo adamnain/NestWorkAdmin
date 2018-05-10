@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     session.createLoginSession(accesToken);
                     //String id = response.body().getToken().toString();
                     //Toast.makeText(LoginActivity.this, accesToken, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginActivity.this,MenuActivity.class);
+                    Intent i = new Intent(LoginActivity.this,DashboardActivity.class);
                     startActivity(i);
                 }
                 else{

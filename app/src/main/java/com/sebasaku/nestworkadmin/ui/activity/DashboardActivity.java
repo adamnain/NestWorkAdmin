@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MenuActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
@@ -45,7 +48,7 @@ public class MenuActivity extends AppCompatActivity {
             ImagesArray.add(IMAGES[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new SlidingImageAdapter(MenuActivity.this,ImagesArray));
+        mPager.setAdapter(new SlidingImageAdapter(DashboardActivity.this,ImagesArray));
 
         CirclePageIndicator indicator = (CirclePageIndicator)
                 findViewById(R.id.indicator);
@@ -107,7 +110,7 @@ public class MenuActivity extends AppCompatActivity {
         karyawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this, ListKaryawanActivity.class);
+                Intent i = new Intent(DashboardActivity.this, ListKaryawanActivity.class);
                 startActivity(i);
             }
         });
@@ -115,7 +118,7 @@ public class MenuActivity extends AppCompatActivity {
         presensiHarian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,ListPresensiActivity.class);
+                Intent i = new Intent(DashboardActivity.this,ListPresensiActivity.class);
                 startActivity(i);
             }
         });
@@ -123,7 +126,7 @@ public class MenuActivity extends AppCompatActivity {
         slipGaji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,ListSlipActivity.class);
+                Intent i = new Intent(DashboardActivity.this,ListSlipActivity.class);
                 startActivity(i);
             }
         });
@@ -131,7 +134,7 @@ public class MenuActivity extends AppCompatActivity {
         infoPerusahaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,ProfilPerusahaanActivity.class);
+                Intent i = new Intent(DashboardActivity.this,ProfilPerusahaanActivity.class);
                 startActivity(i);
             }
         });
@@ -139,7 +142,7 @@ public class MenuActivity extends AppCompatActivity {
         Cuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,CutiActivity.class);
+                Intent i = new Intent(DashboardActivity.this,CutiActivity.class);
                 startActivity(i);
             }
         });
@@ -149,8 +152,37 @@ public class MenuActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         String token = session.getAccesToken();
-        Toast.makeText(MenuActivity.this, token, Toast.LENGTH_LONG).show();
+        Toast.makeText(DashboardActivity.this, token, Toast.LENGTH_LONG).show();
 
     }
+
+    public void logoutUser(){
+        session = new SessionManager(getApplicationContext());
+        session.logoutUser();
+        String token = session.getAccesToken();
+        Toast.makeText(DashboardActivity.this, token, Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                logoutUser();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
 }

@@ -16,6 +16,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -49,8 +50,11 @@ public interface EndPoints {
     @GET("api/present/getAllPresent")
     Call<List<Present>> getAllPresent(@Header("Authorization") String authToken);
 
-    @PUT("api/company/companyprofil")
-    Call<ResponsPerusahaan> editProfil(@Header("Authorization") String authToken, @Body ResponsPerusahaan responsPerusahaan);
+    @PUT("api/company/companyprofil/{id}")
+    Call<ResponsPerusahaan> editProfilPerusahaan(@Header("Authorization") String authToken, @Body ResponsPerusahaan responsPerusahaan, @Path("id") String id);
+
+    @GET("api/company/companyprofil")
+    Call<List<ResponsPerusahaan>> getDataProfilPerusahaan(@Header("Authorization") String authToken);
 
     @GET("api/slipGaji/getAllSlipGaji")
     Call<List<SlipGaji>> getAllSlip(@Header("Authorization") String authToken);
@@ -58,6 +62,7 @@ public interface EndPoints {
     @PUT("api/slipGaji/updateSlipGaji/{id}")
     Call<List<SlipGaji>> updateSlipKaryawan(@Header("Authorization") String authToken, @Path("id") String id, @Body SlipGaji slipGaji);
 
-
+    @DELETE("api/present/deletePresent/{id}")
+    Call<ResponseBody> deletePresensiById(@Header("Authorization") String authToken, @Path("id") String id);
 
 }

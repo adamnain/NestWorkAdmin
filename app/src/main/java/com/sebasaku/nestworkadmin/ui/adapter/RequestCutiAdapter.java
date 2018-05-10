@@ -20,6 +20,7 @@ import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
 import com.sebasaku.nestworkadmin.ui.activity.CutiActivity;
+import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
 import com.sebasaku.nestworkadmin.ui.fragment.DetailPermintaanCutiFragment;
 import com.sebasaku.nestworkadmin.ui.fragment.PermintaanCutiFragment;
 
@@ -108,16 +109,20 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
                     call.enqueue(new Callback<AccCuti>() {
                         @Override
                         public void onResponse(Call<AccCuti> call, Response<AccCuti> response) {
-                            //Toast.makeText(view.getContext(), "onRespon", Toast.LENGTH_SHORT).show();
                             mAdapter.notifyDataSetChanged();
+                            Intent i = new Intent(context,DashboardActivity.class);
+                            Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
 
-//                            Intent i = new Intent(context,CutiActivity.class);
-//                            context.startActivities(new Intent[]{i});
+                            context.startActivities(new Intent[]{i});
                         }
 
                         @Override
                         public void onFailure(Call<AccCuti> call, Throwable t) {
-                            //Toast.makeText(view.getContext(), "onFailure", Toast.LENGTH_SHORT).show();
+                            mAdapter.notifyDataSetChanged();
+                            Intent i = new Intent(context,DashboardActivity.class);
+                            Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+
+                            context.startActivities(new Intent[]{i});
                         }
                     });
 
@@ -154,6 +159,9 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
         public void onClick(View view) {
 
         }
+
+
+
 
     }
 }

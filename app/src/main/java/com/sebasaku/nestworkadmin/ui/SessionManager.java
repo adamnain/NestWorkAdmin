@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.sebasaku.nestworkadmin.ui.activity.LoginActivity;
-import com.sebasaku.nestworkadmin.ui.activity.MenuActivity;
+import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
 
 /**
  * Created by adamnain on 3/17/18.
@@ -81,7 +81,7 @@ public class SessionManager {
         // Check login status
         if(this.isLoggedIn()){
             // user is not logged in redirect him to Menu Activity
-            Intent i = new Intent(_context, MenuActivity.class);
+            Intent i = new Intent(_context, DashboardActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

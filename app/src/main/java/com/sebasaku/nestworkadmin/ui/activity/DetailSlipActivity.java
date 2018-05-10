@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.R;
-import com.sebasaku.nestworkadmin.api.model.ResponsPerusahaan;
 import com.sebasaku.nestworkadmin.api.model.SlipGaji;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
@@ -83,7 +82,7 @@ public class DetailSlipActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SlipGaji>> call, Response<List<SlipGaji>> response) {
                 if(response.isSuccessful()){
-                    Intent i = new Intent(DetailSlipActivity.this,MenuActivity.class);
+                    Intent i = new Intent(DetailSlipActivity.this,DashboardActivity.class);
                     Toast.makeText(DetailSlipActivity.this, "Data berhasil Diupdate", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 }

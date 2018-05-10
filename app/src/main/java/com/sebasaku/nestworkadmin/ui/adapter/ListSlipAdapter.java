@@ -43,6 +43,7 @@ public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSl
     @Override
     public void onBindViewHolder(ListSlipAdapter.ListSlipGajiViewHolder holder, int position) {
         final SlipGaji mCurrent = listSlipGaji.get(position);
+
         holder.tvNamaUser.setText(mCurrent.getEmail());
         holder.tvSesi.setText(mCurrent.getCreatedAt());
 
