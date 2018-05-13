@@ -1,6 +1,7 @@
 package com.sebasaku.nestworkadmin.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.LoginActivity;
 import com.sebasaku.nestworkadmin.ui.adapter.RiwayatCutiAdapter;
 
 import java.util.ArrayList;
@@ -47,7 +49,6 @@ public class RiwayatCutiFragment extends Fragment {
         call.enqueue(new Callback<List<ResponsCuti>>() {
             @Override
             public void onResponse(Call<List<ResponsCuti>> call, Response<List<ResponsCuti>> response) {
-                Toast.makeText(getActivity(), "harusnya bener", Toast.LENGTH_SHORT).show();
                 if (response.code()==200){
                     List<ResponsCuti> responsCuti = response.body();
                     for(int i = 0; i<responsCuti.size(); i++){
@@ -68,12 +69,15 @@ public class RiwayatCutiFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(getActivity(), "not correct", Toast.LENGTH_SHORT).show();
+                    logoutUser();
+                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<List<ResponsCuti>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -83,6 +87,11 @@ public class RiwayatCutiFragment extends Fragment {
         mAdapter = new RiwayatCutiAdapter(getActivity(),listRiwayatCuti);
         mRecyclerView.setAdapter(mAdapter);
         return v;
+    }
+
+    public void logoutUser(){
+        SessionManager session = new SessionManager(getActivity());
+        session.logoutUser();
     }
 
 }

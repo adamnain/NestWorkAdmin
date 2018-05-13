@@ -90,8 +90,6 @@ public class ProfilPerusahaanActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<ResponsPerusahaan>>() {
             @Override
             public void onResponse(Call<List<ResponsPerusahaan>> call, Response<List<ResponsPerusahaan>> response) {
-                Toast.makeText(ProfilPerusahaanActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
-
                 List<ResponsPerusahaan> profil = response.body();
                 for(int i = 0; i<1; i++){
                     etNamaPerusahaan.setText(profil.get(i).getNamaPerusahaan());

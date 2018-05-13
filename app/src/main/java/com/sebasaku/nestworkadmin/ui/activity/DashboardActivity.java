@@ -25,7 +25,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
-    private static final Integer[] IMAGES= {R.drawable.jesica,R.drawable.jesica,R.drawable.jesica};
+    private static final Integer[] IMAGES= {R.drawable.slide3,R.drawable.slide2,R.drawable.slide3};
     private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
 
     CardView karyawan ,slipGaji,Cuti,infoPerusahaan,presensiHarian;
@@ -35,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_dashboard);
         initSlider();
         initializedObject();
         actionClicked();
@@ -152,7 +152,7 @@ public class DashboardActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         String token = session.getAccesToken();
-        Toast.makeText(DashboardActivity.this, token, Toast.LENGTH_LONG).show();
+//        Toast.makeText(DashboardActivity.this, token, Toast.LENGTH_LONG).show();
 
     }
 

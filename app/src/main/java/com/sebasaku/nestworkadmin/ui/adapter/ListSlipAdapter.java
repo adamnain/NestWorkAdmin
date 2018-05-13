@@ -1,21 +1,33 @@
 package com.sebasaku.nestworkadmin.ui.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.model.AllUser;
+import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
 import com.sebasaku.nestworkadmin.api.model.SlipGaji;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
+import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
 import com.sebasaku.nestworkadmin.ui.activity.DetailKaryawanActivity;
 import com.sebasaku.nestworkadmin.ui.activity.DetailSlipActivity;
 
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSlipGajiViewHolder>{
     //deklarasi global variabel
@@ -55,7 +67,7 @@ public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSl
         return listSlipGaji.size();
     }
 
-    public class ListSlipGajiViewHolder extends RecyclerView.ViewHolder  {
+    public class ListSlipGajiViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener  {
         private TextView tvNamaUser, tvSesi;
         private Button btnKirimSlip;
 
@@ -93,7 +105,66 @@ public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSl
             });
 
             this.mAdapter = adapter;
+            itemView.setOnLongClickListener(this);
 
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            int mPosition = getLayoutPosition();
+            final SlipGaji element = listSlipGaji.get(mPosition);
+
+            //alert dialog
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Hapus data ini?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Ya",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            hapusData(element.getId());
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "Tidak",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            return false;
+        }
+
+        private void hapusData(String id){
+            int mPosition = getLayoutPosition();
+            SlipGaji element = listSlipGaji.get(mPosition);
+            SessionManager userPref = new SessionManager(context);
+            String accesToken = userPref.getAccesToken();
+            Call<ResponseBody> call = UtilsApi.getAPIService().deleteSlipById("Bearer " + accesToken, id);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+            });
         }
 
     }

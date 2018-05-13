@@ -1,13 +1,21 @@
 package com.sebasaku.nestworkadmin.ui.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
+import com.sebasaku.nestworkadmin.api.model.User;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
+import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
 import com.sebasaku.nestworkadmin.ui.activity.DetailKaryawanActivity;
 import com.sebasaku.nestworkadmin.api.model.AllUser;
 import com.sebasaku.nestworkadmin.R;
@@ -15,6 +23,10 @@ import com.sebasaku.nestworkadmin.R;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by adam on 2/23/18.
@@ -57,7 +69,7 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
         return listAllUser.size();
     }
 
-    public class ListAllUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListAllUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView namaUser, jobUser;
         private CircleImageView avaUser;
 
@@ -72,6 +84,7 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
             jobUser = (TextView) itemView.findViewById(R.id.jobUser);
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         //untuk menambah action click pada list item
@@ -88,8 +101,67 @@ public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapte
             i.putExtra("email",element.getEmail());
             i.putExtra("tanggalLahir",element.getNoHp());
             i.putExtra("hp",element.getNoHp());
+            i.putExtra("id",element.getId());
             context.startActivity(i);
             mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            int mPosition = getLayoutPosition();
+            final AllUser element = listAllUser.get(mPosition);
+
+            //alert dialog
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Hapus data ini?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Ya",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            hapusData(element.getId());
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "Tidak",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            return false;
+        }
+
+        private void hapusData(String id){
+            int mPosition = getLayoutPosition();
+            AllUser element = listAllUser.get(mPosition);
+            SessionManager userPref = new SessionManager(context);
+            String accesToken = userPref.getAccesToken();
+            Call<ResponseBody> call = UtilsApi.getAPIService().deleteUserById("Bearer " + accesToken, id);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+            });
         }
     }
 

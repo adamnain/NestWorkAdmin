@@ -46,13 +46,11 @@ public class ListKaryawanActivity extends AppCompatActivity {
 
         SessionManager userPref = new SessionManager(getApplicationContext());
         String accesToken = userPref.getAccesToken();
-        //java.lang.String accesToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjUxNDcwMjcsImlhdCI6MTUyMjU1NTAyNywic3ViIjoiNWFhNjY1N2Q0MzRiMjg0NDBlNGNhYThiIn0.sl-IiWn4QWao_d2bzF6UW9-m9mIBPcIANyZAn5XGeks";
 
         Call<List<AllUser>> call = UtilsApi.getAPIService().getAllUser("Bearer "+accesToken);
         call.enqueue(new Callback<List<AllUser>>() {
             @Override
             public void onResponse(Call<List<AllUser>> call, Response<List<AllUser>> response) {
-                Toast.makeText(ListKaryawanActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
                 if (response.code()==200){
                     List<AllUser> allUser = response.body();
                     for(int i = 0; i<allUser.size(); i++){
@@ -69,12 +67,15 @@ public class ListKaryawanActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(ListKaryawanActivity.this, "not correct", Toast.LENGTH_SHORT).show();
+                    logoutUser();
+                    Intent i = new Intent(ListKaryawanActivity.this, LoginActivity.class);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<List<AllUser>> call, Throwable t) {
-                Toast.makeText(ListKaryawanActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListKaryawanActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -117,6 +118,11 @@ public class ListKaryawanActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    public void logoutUser(){
+        SessionManager session = new SessionManager(getApplicationContext());
+        session.logoutUser();
     }
 
 }

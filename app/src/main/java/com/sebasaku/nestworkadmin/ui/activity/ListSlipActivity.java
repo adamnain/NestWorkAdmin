@@ -1,5 +1,6 @@
 package com.sebasaku.nestworkadmin.ui.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,7 +46,6 @@ public class ListSlipActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<SlipGaji>>() {
             @Override
             public void onResponse(Call<List<SlipGaji>> call, Response<List<SlipGaji>> response) {
-                Toast.makeText(ListSlipActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
                 if (response.code()==200){
                     List<SlipGaji> slip = response.body();
                     for(int i = 0; i<slip.size(); i++){
@@ -70,12 +70,15 @@ public class ListSlipActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(ListSlipActivity.this, "not correct", Toast.LENGTH_SHORT).show();
+                    logoutUser();
+                    Intent i = new Intent(ListSlipActivity.this, LoginActivity.class);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<List<SlipGaji>> call, Throwable t) {
-                Toast.makeText(ListSlipActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListSlipActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,6 +107,11 @@ public class ListSlipActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void logoutUser(){
+        SessionManager session = new SessionManager(getApplicationContext());
+        session.logoutUser();
     }
 
 

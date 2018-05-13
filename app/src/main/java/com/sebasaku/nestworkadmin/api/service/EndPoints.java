@@ -65,4 +65,13 @@ public interface EndPoints {
     @DELETE("api/present/deletePresent/{id}")
     Call<ResponseBody> deletePresensiById(@Header("Authorization") String authToken, @Path("id") String id);
 
+    @DELETE("api/cuti/deleteCuti/{id}")
+    Call<ResponseBody> deleteCutiById(@Header("Authorization") String authToken, @Path("id") String id);
+
+    @DELETE("api/slipGaji/deleteSlipGaji/{id}")
+    Call<ResponseBody> deleteSlipById(@Header("Authorization") String authToken, @Path("id") String id);
+
+    @DELETE("api/users/{id}")
+    Call<ResponseBody> deleteUserById(@Header("Authorization") String authToken, @Path("id") String id);
+
 }

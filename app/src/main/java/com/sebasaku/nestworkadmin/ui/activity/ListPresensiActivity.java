@@ -47,7 +47,6 @@ public class ListPresensiActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Present>>() {
             @Override
             public void onResponse(Call<List<Present>> call, Response<List<Present>> response) {
-                Toast.makeText(ListPresensiActivity.this, "harusnya bener", Toast.LENGTH_SHORT).show();
                 if (response.code()==200){
                     List<Present> allUser = response.body();
                     for(int i = 0; i<allUser.size(); i++){
@@ -67,12 +66,15 @@ public class ListPresensiActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(ListPresensiActivity.this, "not correct", Toast.LENGTH_SHORT).show();
+                    logoutUser();
+                    Intent i = new Intent(ListPresensiActivity.this, LoginActivity.class);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Present>> call, Throwable t) {
-                Toast.makeText(ListPresensiActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListPresensiActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,6 +104,12 @@ public class ListPresensiActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void logoutUser(){
+        SessionManager session = new SessionManager(getApplicationContext());
+        session.logoutUser();
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.sebasaku.nestworkadmin.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.model.AccCuti;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.ListPresensiActivity;
+import com.sebasaku.nestworkadmin.ui.activity.LoginActivity;
 import com.sebasaku.nestworkadmin.ui.adapter.RequestCutiAdapter;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
@@ -49,7 +52,6 @@ public class PermintaanCutiFragment extends Fragment {
         call.enqueue(new Callback<List<ResponsCuti>>() {
             @Override
             public void onResponse(Call<List<ResponsCuti>> call, Response<List<ResponsCuti>> response) {
-                Toast.makeText(getActivity(), "harusnya bener", Toast.LENGTH_SHORT).show();
                 if (response.code()==200){
                     List<ResponsCuti> responsCuti = response.body();
                     for(int i = 0; i<responsCuti.size(); i++){
@@ -74,12 +76,15 @@ public class PermintaanCutiFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(getActivity(), "not correct", Toast.LENGTH_SHORT).show();
+                    logoutUser();
+                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
                 }
             }
 
             @Override
             public void onFailure(Call<List<ResponsCuti>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,6 +94,11 @@ public class PermintaanCutiFragment extends Fragment {
         mAdapter = new RequestCutiAdapter(getActivity(),listRequestCuti);
         mRecyclerView.setAdapter(mAdapter);
         return v;
+    }
+
+    public void logoutUser(){
+        SessionManager session = new SessionManager(getActivity());
+        session.logoutUser();
     }
 
 

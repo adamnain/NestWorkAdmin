@@ -1,11 +1,8 @@
 package com.sebasaku.nestworkadmin.ui.adapter;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,22 +13,18 @@ import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.model.AccCuti;
 import com.sebasaku.nestworkadmin.api.model.DecCuti;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
-//import com.sebasaku.nestworkadmin.ui.AccCutiService;
 import com.sebasaku.nestworkadmin.api.service.UtilsApi;
 import com.sebasaku.nestworkadmin.ui.SessionManager;
-import com.sebasaku.nestworkadmin.ui.activity.CutiActivity;
 import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
-import com.sebasaku.nestworkadmin.ui.fragment.DetailPermintaanCutiFragment;
-import com.sebasaku.nestworkadmin.ui.fragment.PermintaanCutiFragment;
 
 import android.content.Intent;
 import android.widget.Toast;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +69,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
         return listCuti.size();
     }
 
-    public class ListCutiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListCutiViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private TextView namaKaryawan, awalCuti, akhirCuti, keterangaCuti;
         private CircleImageView avaUser;
         private Button btnAcc, btnDec;
@@ -94,7 +87,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
             btnAcc = itemView.findViewById(R.id.btn_acc);
             btnDec = itemView.findViewById(R.id.btn_dec);
             this.mAdapter = adapter;
-            //itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
 
             btnAcc.setOnClickListener(new View.OnClickListener() {
@@ -141,14 +134,20 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
                     call.enqueue(new Callback<DecCuti>() {
                         @Override
                         public void onResponse(Call<DecCuti> call, Response<DecCuti> response) {
-//                            Intent i = new Intent(context,CutiActivity.class);
-//                            context.startActivities(new Intent[]{i});
                             mAdapter.notifyDataSetChanged();
+                            Intent i = new Intent(context,DashboardActivity.class);
+                            Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+
+                            context.startActivities(new Intent[]{i});
                         }
 
                         @Override
                         public void onFailure(Call<DecCuti> call, Throwable t) {
+                            mAdapter.notifyDataSetChanged();
+                            Intent i = new Intent(context,DashboardActivity.class);
+                            Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
 
+                            context.startActivities(new Intent[]{i});
                         }
                     });
                 }
@@ -156,8 +155,61 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
         }
 
         @Override
-        public void onClick(View view) {
+        public boolean onLongClick(View view) {
+            int mPosition = getLayoutPosition();
+            final ResponsCuti element = listCuti.get(mPosition);
 
+            //alert dialog
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Hapus data ini?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Ya",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            hapusData(element.getId());
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "Tidak",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            return false;
+        }
+
+        private void hapusData(String id){
+            int mPosition = getLayoutPosition();
+            ResponsCuti element = listCuti.get(mPosition);
+            SessionManager userPref = new SessionManager(context);
+            String accesToken = userPref.getAccesToken();
+            Call<ResponseBody> call = UtilsApi.getAPIService().deleteCutiById("Bearer " + accesToken, id);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+            });
         }
 
 

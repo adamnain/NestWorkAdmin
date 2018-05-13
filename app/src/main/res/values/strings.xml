@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NestWork Admin</string>
+    <string name="app_name">E-mployee Admin</string>
     <string name="please_login">Please log in as Admin to access NestWork</string>
     <string name="presensi_harian">Presensi</string>
     <string name="karyawan">Karyawan</string>

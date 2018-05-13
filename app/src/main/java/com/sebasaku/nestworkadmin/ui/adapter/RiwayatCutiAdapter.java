@@ -1,18 +1,31 @@
 package com.sebasaku.nestworkadmin.ui.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sebasaku.nestworkadmin.R;
 import com.sebasaku.nestworkadmin.api.model.ResponsCuti;
+import com.sebasaku.nestworkadmin.api.service.UtilsApi;
+import com.sebasaku.nestworkadmin.ui.SessionManager;
+import com.sebasaku.nestworkadmin.ui.activity.DashboardActivity;
 
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.ListCutiViewHolder> {
     //private LinkedList<RiwayatCuti> listCuti;
@@ -52,7 +65,6 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
         else if (mCurrent.getStatus() == 0){
             holder.ivStatusCuti.setImageResource(R.drawable.ic_decline);
         }
-        //holder.tlKet.setText("Keterangan : ");
     }
 
     //untuk menghitung jumlah data yang ada pada list
@@ -61,7 +73,7 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
         return listCuti.size();
     }
 
-    public class ListCutiViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/ {
+    public class ListCutiViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         final RiwayatCutiAdapter mAdapter;
         private TextView awalCuti;
         private TextView akhirCuti;
@@ -88,7 +100,68 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
             tvNamaKaryawan = itemView.findViewById(R.id.tv_nama_karyawan);
 
             this.mAdapter = adapter;
-            //itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+
+        private void hapusData(String id){
+            int mPosition = getLayoutPosition();
+            ResponsCuti element = listCuti.get(mPosition);
+            SessionManager userPref = new SessionManager(context);
+            String accesToken = userPref.getAccesToken();
+            Call<ResponseBody> call = UtilsApi.getAPIService().deleteCutiById("Bearer " + accesToken, id);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(context,DashboardActivity.class);
+                    Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
+
+                    context.startActivities(new Intent[]{i});
+                }
+            });
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            int mPosition = getLayoutPosition();
+            final ResponsCuti element = listCuti.get(mPosition);
+
+            //alert dialog
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Hapus data ini?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Ya",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            hapusData(element.getId());
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "Tidak",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            return false;
         }
     }
+
+
 }
