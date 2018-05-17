@@ -28,7 +28,6 @@
         <activity
             android:name=".ui.activity.CutiActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".ui.activity.SlipGajiActivity" />
         <activity android:name=".ui.activity.ListSlipActivity" />
         <activity android:name=".ui.activity.DetailSlipActivity" />
         <activity android:name=".ui.activity.ProfilPerusahaanActivity"></activity>

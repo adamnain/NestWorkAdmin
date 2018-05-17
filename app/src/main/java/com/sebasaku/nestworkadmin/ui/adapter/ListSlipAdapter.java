@@ -56,8 +56,74 @@ public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSl
     public void onBindViewHolder(ListSlipAdapter.ListSlipGajiViewHolder holder, int position) {
         final SlipGaji mCurrent = listSlipGaji.get(position);
 
+        String tgl = mCurrent.getCreatedAt();
+        String[]parts = tgl.split("T");
+        String tgls = parts[0];
+        String[]partss = tgls.split("-");
+        String tglss = partss[2];
+        String bln = partss[1];
+        int tanggal = Integer.parseInt(tglss);
+        int bulan = Integer.parseInt(bln);
+        String sesi = "";
+
+        if (bulan == 1){
+            sesi = sesi+"Januari ";
+        }
+        else if (bulan == 2){
+            sesi = sesi+"Februari ";
+
+        }
+        else if (bulan == 3){
+            sesi = sesi+"Maret ";
+
+        }
+        else if (bulan == 4){
+            sesi = sesi+"April ";
+
+        }
+        else if (bulan == 5){
+            sesi = sesi+"Mei ";
+
+        }
+        else if (bulan == 6){
+            sesi = sesi+"Juni ";
+
+        }
+        else if (bulan == 7){
+            sesi = sesi+"Juli ";
+
+        }
+        else if (bulan == 8){
+            sesi = sesi+"Agustus ";
+
+        }
+        else if (bulan == 9){
+            sesi = sesi+"September ";
+
+        }
+        else if (bulan == 10){
+            sesi = sesi+"Oktober ";
+
+        }
+        else if (bulan == 11){
+            sesi = sesi+"November ";
+
+        }
+        else if (bulan == 12){
+            sesi = sesi+"Desember ";
+
+        }
+
+        if (tanggal<=15){
+            sesi = sesi+"Sesi Satu";
+            holder.tvSesi.setText(sesi);
+        }
+        else if (tanggal > 15){
+            sesi = sesi+"Sesi Dua";
+            holder.tvSesi.setText(sesi);
+        }
+
         holder.tvNamaUser.setText(mCurrent.getEmail());
-        holder.tvSesi.setText(mCurrent.getCreatedAt());
 
     }
 

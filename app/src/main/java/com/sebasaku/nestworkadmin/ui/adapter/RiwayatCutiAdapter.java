@@ -84,6 +84,7 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
         private TextView tlAkhirCuti;
         private TextView tvNamaKaryawan;
         private ImageView ivStatusCuti;
+        private CardView cvRiwayat;
 
         //untuk casting view yang digunakan pada list item
         public ListCutiViewHolder(View itemView, RiwayatCutiAdapter adapter) {
@@ -94,13 +95,13 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
             keterangan = itemView.findViewById(R.id.tv_keterangan);
             tlAwalCuti = itemView.findViewById(R.id.tl_awal_cuti);
             tlAkhirCuti = itemView.findViewById(R.id.tv_akhir_cuti);
-            tlCard = itemView.findViewById(R.id.cd_view);
             tlKet = itemView.findViewById(R.id.tl_keterangan);
             ivStatusCuti = itemView.findViewById(R.id.iv_status);
             tvNamaKaryawan = itemView.findViewById(R.id.tv_nama_karyawan);
+            cvRiwayat = itemView.findViewById(R.id.cv_view_riwayat_cuti);
 
             this.mAdapter = adapter;
-            itemView.setOnLongClickListener(this);
+            cvRiwayat.setOnLongClickListener(this);
         }
 
 
@@ -137,11 +138,11 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
             final ResponsCuti element = listCuti.get(mPosition);
 
             //alert dialog
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.setMessage("Hapus data ini?");
-            builder1.setCancelable(true);
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+            builder2.setMessage("Hapus data ini?");
+            builder2.setCancelable(true);
 
-            builder1.setPositiveButton(
+            builder2.setPositiveButton(
                     "Ya",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -149,7 +150,7 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
                         }
                     });
 
-            builder1.setNegativeButton(
+            builder2.setNegativeButton(
                     "Tidak",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -157,8 +158,8 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
                         }
                     });
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+            AlertDialog alert12 = builder2.create();
+            alert12.show();
             return false;
         }
     }

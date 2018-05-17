@@ -42,7 +42,75 @@ public class DetailSlipActivity extends AppCompatActivity {
 
     private void getIntentData(){
         tvNamaKaryawan.setText(getIntent().getStringExtra("email"));
-        tvSesiGaji.setText(getIntent().getStringExtra("createdAt"));
+
+        //parse string
+        String tgl = getIntent().getStringExtra("createdAt");
+        String[]parts = tgl.split("T");
+        String tgls = parts[0];
+        String[]partss = tgls.split("-");
+        String tglss = partss[2];
+        String bln = partss[1];
+        int tanggal = Integer.parseInt(tglss);
+        int bulan = Integer.parseInt(bln);
+        String sesi = "";
+
+        if (bulan == 1){
+            sesi = sesi+"Januari ";
+        }
+        else if (bulan == 2){
+            sesi = sesi+"Februari ";
+
+        }
+        else if (bulan == 3){
+            sesi = sesi+"Maret ";
+
+        }
+        else if (bulan == 4){
+            sesi = sesi+"April ";
+
+        }
+        else if (bulan == 5){
+            sesi = sesi+"Mei ";
+
+        }
+        else if (bulan == 6){
+            sesi = sesi+"Juni ";
+
+        }
+        else if (bulan == 7){
+            sesi = sesi+"Juli ";
+
+        }
+        else if (bulan == 8){
+            sesi = sesi+"Agustus ";
+
+        }
+        else if (bulan == 9){
+            sesi = sesi+"September ";
+
+        }
+        else if (bulan == 10){
+            sesi = sesi+"Oktober ";
+
+        }
+        else if (bulan == 11){
+            sesi = sesi+"November ";
+
+        }
+        else if (bulan == 12){
+            sesi = sesi+"Desember ";
+
+        }
+
+        if (tanggal<=15){
+            sesi = sesi+" Sesi Satu";
+            tvSesiGaji.setText(sesi);
+        }
+        else if (tanggal > 15){
+            sesi = sesi+" Sesi Dua";
+            tvSesiGaji.setText(sesi);
+        }
+
     }
 
     private void intializedObject(){
@@ -93,7 +161,7 @@ public class DetailSlipActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<SlipGaji>> call, Throwable t) {
-                Toast.makeText(DetailSlipActivity.this, "error", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
