@@ -103,11 +103,11 @@ public class DetailSlipActivity extends AppCompatActivity {
         }
 
         if (tanggal<=15){
-            sesi = sesi+" Sesi Satu";
+            sesi = sesi+"Sesi Satu";
             tvSesiGaji.setText(sesi);
         }
         else if (tanggal > 15){
-            sesi = sesi+" Sesi Dua";
+            sesi = sesi+"Sesi Dua";
             tvSesiGaji.setText(sesi);
         }
 

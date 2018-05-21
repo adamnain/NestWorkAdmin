@@ -3,6 +3,7 @@ package com.sebasaku.nestworkadmin.ui.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
         private TextView namaKaryawan, awalCuti, akhirCuti, keterangaCuti;
         private CircleImageView avaUser;
         private Button btnAcc, btnDec;
+        private CardView cvPermintaanCuti;
 
         final RequestCutiAdapter mAdapter;
 
@@ -86,6 +88,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
             keterangaCuti = itemView.findViewById(R.id.tv_cuti_keterangan);
             btnAcc = itemView.findViewById(R.id.btn_acc);
             btnDec = itemView.findViewById(R.id.btn_dec);
+            cvPermintaanCuti = itemView.findViewById(R.id.cv_permintaan_cuti);
             this.mAdapter = adapter;
             itemView.setOnLongClickListener(this);
 

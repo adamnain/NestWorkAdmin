@@ -56,6 +56,7 @@ public class ListSlipAdapter extends RecyclerView.Adapter<ListSlipAdapter.ListSl
     public void onBindViewHolder(ListSlipAdapter.ListSlipGajiViewHolder holder, int position) {
         final SlipGaji mCurrent = listSlipGaji.get(position);
 
+        //split tanggal
         String tgl = mCurrent.getCreatedAt();
         String[]parts = tgl.split("T");
         String tgls = parts[0];

@@ -25,7 +25,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
-    private static final Integer[] IMAGES= {R.drawable.slide3,R.drawable.slide2,R.drawable.slide3};
+    private static final Integer[] IMAGES= {R.drawable.slide1,R.drawable.slide2,R.drawable.slide3};
     private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
 
     CardView karyawan ,slipGaji,Cuti,infoPerusahaan,presensiHarian;

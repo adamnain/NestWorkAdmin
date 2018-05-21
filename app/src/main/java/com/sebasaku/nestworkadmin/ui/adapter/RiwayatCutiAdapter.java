@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,7 +118,6 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
                     mAdapter.notifyDataSetChanged();
                     Intent i = new Intent(context,DashboardActivity.class);
                     Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
-
                     context.startActivities(new Intent[]{i});
                 }
 
@@ -126,7 +126,6 @@ public class RiwayatCutiAdapter extends RecyclerView.Adapter<RiwayatCutiAdapter.
                     mAdapter.notifyDataSetChanged();
                     Intent i = new Intent(context,DashboardActivity.class);
                     Toast.makeText(context, "Data Berhasil Diupdate", Toast.LENGTH_SHORT).show();
-
                     context.startActivities(new Intent[]{i});
                 }
             });
