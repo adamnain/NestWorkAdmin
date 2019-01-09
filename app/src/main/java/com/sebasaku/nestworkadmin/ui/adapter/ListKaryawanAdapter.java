@@ -33,7 +33,7 @@ import retrofit2.Response;
  */
 
 public class ListKaryawanAdapter extends RecyclerView.Adapter<ListKaryawanAdapter.ListAllUserViewHolder> {
-    //deklarasi global variabel
+    //deklarasi global v ariabel
     private Context context;
     private final List<AllUser> listAllUser;
 

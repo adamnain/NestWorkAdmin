@@ -77,22 +77,22 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/textSize_detailKaryawan_tv" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_detailKaryawan_height"
-                android:layout_marginTop="@dimen/marginTop_detailKaryawan_v"
-                android:background="@color/colorDivider" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/height_detailKaryawan_height"-->
+                <!--android:layout_marginTop="@dimen/marginTop_detailKaryawan_v"-->
+                <!--android:background="@color/colorDivider" />-->
 
-            <TextView
-                android:id="@+id/tanggalLahir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginTop_detailKaryawan_tv"
-                android:drawableLeft="@drawable/ic_birth"
-                android:drawablePadding="@dimen/padding_login_frame"
-                android:text="28 Februari 1996"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/textSize_detailKaryawan_tv" />
+            <!--<TextView-->
+                <!--android:id="@+id/tanggalLahir"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/marginTop_detailKaryawan_tv"-->
+                <!--android:drawableLeft="@drawable/ic_birth"-->
+                <!--android:drawablePadding="@dimen/padding_login_frame"-->
+                <!--android:text="28 Februari 1996"-->
+                <!--android:textColor="@color/colorPrimaryText"-->
+                <!--android:textSize="@dimen/textSize_detailKaryawan_tv" />-->
 
             <View
                 android:layout_width="match_parent"

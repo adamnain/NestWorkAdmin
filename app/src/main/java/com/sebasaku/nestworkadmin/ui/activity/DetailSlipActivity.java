@@ -126,6 +126,9 @@ public class DetailSlipActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateData();
+                Intent i = new Intent(getApplicationContext(),DashboardActivity.class);
+                startActivity(i);
+
             }
         });
     }
@@ -150,8 +153,8 @@ public class DetailSlipActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SlipGaji>> call, Response<List<SlipGaji>> response) {
                 if(response.isSuccessful()){
-                    Intent i = new Intent(DetailSlipActivity.this,DashboardActivity.class);
-                    Toast.makeText(DetailSlipActivity.this, "Data berhasil Diupdate", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(),DashboardActivity.class);
+                    Toast.makeText(getApplicationContext(), "Data berhasil Diupdate", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 }
                 else{

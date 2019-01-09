@@ -37,7 +37,7 @@ public class DetailKaryawanActivity extends AppCompatActivity {
         namaUser.setText(getIntent().getStringExtra("namaUser"));
         jobUser.setText(getIntent().getStringExtra("posisi"));
         email.setText(getIntent().getStringExtra("email"));
-        tanggalLahir.setText(getIntent().getStringExtra("tanggalLahir"));
+        //tanggalLahir.setText(getIntent().getStringExtra("tanggalLahir"));
         hp.setText(getIntent().getStringExtra("hp"));
     }
 
@@ -47,7 +47,7 @@ public class DetailKaryawanActivity extends AppCompatActivity {
         cardView = (CardView) findViewById(R.id.cardView);
         jobUser = (TextView) findViewById(R.id.jobUser);
         email = (TextView) findViewById(R.id.email);
-        tanggalLahir = (TextView) findViewById(R.id.tanggalLahir);
+        //tanggalLahir = (TextView) findViewById(R.id.tanggalLahir);
         hp = (TextView) findViewById(R.id.hp);
 
     }

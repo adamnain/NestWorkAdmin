@@ -95,7 +95,7 @@ public class ProfilPerusahaanActivity extends AppCompatActivity {
                     etNamaPerusahaan.setText(profil.get(i).getNamaPerusahaan());
                     etEmailPerusahaan.setText(profil.get(i).getEmail());
                     etProfilPerusahaan.setText(profil.get(i).getProfil());
-                    etPeraturanPerusahaan.setText(profil.get(i).getProfil());
+                    etPeraturanPerusahaan.setText(profil.get(i).getPeraturan());
                     id = profil.get(i).getId();
                 }
 

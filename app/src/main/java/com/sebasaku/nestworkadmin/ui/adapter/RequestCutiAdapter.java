@@ -116,7 +116,7 @@ public class RequestCutiAdapter extends RecyclerView.Adapter<RequestCutiAdapter.
                         public void onFailure(Call<AccCuti> call, Throwable t) {
                             mAdapter.notifyDataSetChanged();
                             Intent i = new Intent(context,DashboardActivity.class);
-                            Toast.makeText(context, "Data Berhasil Diuodate", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Data Gagal Diuodate", Toast.LENGTH_SHORT).show();
 
                             context.startActivities(new Intent[]{i});
                         }
